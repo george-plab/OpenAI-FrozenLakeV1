@@ -1,0 +1,6 @@
+numpy
+gymnasium[classic-control] 
+swig 
+gymnasium[box2d]
+gymnasium[atari] 
+copier
