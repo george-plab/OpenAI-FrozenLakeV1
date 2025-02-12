@@ -2,7 +2,11 @@
 """
 Created on Tue Feb 12 2025
 
-@author: VicAgent 
+Mod @author: VicAgent from: 
+https://awjuliani.medium.com/simple-reinforcement-learning-with-tensorflow-part-0-q-learning-with-tables-and-neural-networks-d195264329d0
+
+This mod Update OpenAiGym-> OpenAiGynasyum 
+
 """
 """
 Frozen lake environment from openai Gymnasiun. 
@@ -43,49 +47,45 @@ env = gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=False)
 Q = np.zeros((env.observation_space.n ,env.action_space.n))
 print(env.observation_space.n)
 print(env.action_space.n)
-#print(Q)
-#print( Q[1,0:env.action_space.n] + np.random.randn(env.action_space.n)) 
+
 
 # Set learning parameters
 lr = .7  
 y = .9 # Factor de descuento
 num_episodes = 4000
 #create lists to contain total rewards and steps per episode
-#jList = []
+
 rList = []
 for i in range(num_episodes):
     #Reset environment and get first new observation
     obs = env.reset()
-    obs_index=obs[0]
-    #print(obs)
-    #print(obs_index)
+    current_obs=obs[0]
     rAll = 0
     done = False
     j = 0
     while j < 99:
         j+=1
         #Choose an action by greedily (with noise) picking from Q table
-        Q[obs_index,0:env.action_space.n]+= np.random.randn(env.action_space.n)  * (1./(i+1))
-        #print(Q[obs_index,0:env.action_space.n])
-        #a = np.argmax(  Q[obs, : ]  +  np.random.randn(1,env.action_space.n)  * (1./(i+1))  )
-        a = np.argmax(  Q[obs_index,0:env.action_space.n] )
-        #print(a)
-        
+        Q[current_obs,0:env.action_space.n]+= np.random.randn(env.action_space.n)  * (1./(i+1))
+       
+        a = np.argmax(  Q[current_obs,0:env.action_space.n] )              
         #Get new state and reward from environment
         next_obs, reward, terminated, truncated, info = env.step(a)
-        #print(next_obs)
+        #print(next_obs)  #print(a) 
+       
         #Update Q-Table with new knowledge
-        Q[obs_index,a] = Q[obs_index,a] + lr*(reward + y*np.max(Q[next_obs,:]) - Q[obs_index,a])
+        Q[current_obs,a] = Q[current_obs,a] + lr*(reward + y*np.max(Q[next_obs,:]) - Q[current_obs,a])
         rAll += reward
-        obs_index = next_obs
+        
+        current_obs = next_obs
         done= terminated or truncated
         if done == True:
             break
-    #jList.append(j)
+   
     rList.append(rAll)
 
 print("Score over time: {}".format(str(sum(rList)/num_episodes)))
-print("Final Q-Table Values")
-print(Q)
+print(f"Final Q-Table Values: {Q}")
+
 
 
