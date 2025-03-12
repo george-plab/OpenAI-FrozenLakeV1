@@ -3,7 +3,7 @@ Frozen lake is a  environment from openai Gymnasiun
 
 this is a mod from: 
 
-[Arthur Juliani Article about Simple reinforment Learning with tensor flow Part 0](#https://awjuliani.medium.com/simple-reinforcement-learning-with-tensorflow-part-0-q-learning-with-tables-and-neural-networks-d195264329d0)
+[Arthur Juliani Article about Simple reinforment Learning with tensor flow Part 0](https://awjuliani.medium.com/simple-reinforcement-learning-with-tensorflow-part-0-q-learning-with-tables-and-neural-networks-d195264329d0)
 
 The mod is an upgrade from OpenAiGym  to OpenAiGymnasium
 
@@ -49,23 +49,44 @@ Reach goal: +1
 Reach hole: 0
 Reach frozen: 0
 
-desc=None: Used to specify maps non-preloaded maps.
-a custom map coulb be
+```bash
+import gymnasium as gym
+gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=True)
+```
+desc=None: Used to specify maps non-preloaded maps. a custom map coulb be
+```bash
+
 desc=["SFFF", "FHFH", "FFFH", "HFFG"] 
+
+```
 S:start, H:hole, F:Frozen, G:Goal
 
-map_name could be 4x4 or 8x8 blocks (preloaded maps)
+map_name #could be 4x4 or 8x8 blocks (preloaded maps)
 
-"4x4":["SFFF","FHFH","FFFH", "HFFG"]
+```bash
+"4x4":[ "SFFF",
+        "FHFH", #Frozen, hole, Frozen , hole
+        "FFFH", 
+        "HFFG"] 
 
-"8x8": ["SFFFFFFF","FFFFFFFF","FFFHFFFF","FFFFFHFF","FFFHFFFF","FHHFFFHF","FHFFHFHF","FFFHFFFG",]
+"8x8": ["SFFFFFFF",
+        "FFFFFFFF",
+        "FFFHFFFF",
+        "FFFFFHFF",
+        "FFFHFFFF",
+        "FHHFFFHF",
+        "FHFFHFHF",
+        "FFFHFFFG",] 
+```
 
 If desc=None then map_name will be used. If both desc and map_name are None a random 8x8 map with 80% of locations frozen will be generated.
 
-is_slippery=True: If true the player will move in intended direction with probability of 1/3
+is_slippery=True:
+If true the player will move in intended direction with probability of 1/3
 else will move in either perpendicular direction with equal probability of 1/3 in both directions.
 
-[FrozenLake From Gymnasium](#https://gymnasium.farama.org/environments/toy_text/frozen_lake/)
+
+[Doc from FrozenLake From Gymnasium](https://gymnasium.farama.org/environments/toy_text/frozen_lake/)
 
 
 ## Changes from Gym to Gymnasium:
