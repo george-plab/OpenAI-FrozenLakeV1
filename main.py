@@ -7,33 +7,9 @@ https://awjuliani.medium.com/simple-reinforcement-learning-with-tensorflow-part-
 
 This mod Update OpenAiGym-> OpenAiGynasyum 
 
+This project is licensed under the [MIT License]
 """
 """
-Frozen lake environment from openai Gymnasiun. 
-
-Map is grid of blocks, one start block and one end/goal block, safe frozen blocks or dangerous hole blocks
-the agent/player moves until reach the goal
-Rewards:
-Reach goal: +1
-Reach hole: 0
-Reach frozen: 0
-
-desc=None: Used to specify maps non-preloaded maps.
-a custom map coulb be
-desc=["SFFF", "FHFH", "FFFH", "HFFG"] 
-S:start, H:hole, F:Frozen, G:Goal
-
-map_name could be 4x4 or 8x8 blocks (preloaded maps)
-
-"4x4":["SFFF","FHFH","FFFH", "HFFG"]
-
-"8x8": ["SFFFFFFF","FFFFFFFF","FFFHFFFF","FFFFFHFF","FFFHFFFF","FHHFFFHF","FHFFHFHF","FFFHFFFG",]
-
-If desc=None then map_name will be used. If both desc and map_name are None a random 8x8 map with 80% of locations frozen will be generated.
-
-is_slippery=True: If true the player will move in intended direction with probability of 1/3
-else will move in either perpendicular direction with equal probability of 1/3 in both directions.
-
 https://gymnasium.farama.org/environments/toy_text/frozen_lake/
 
 """
@@ -70,8 +46,7 @@ for i in range(num_episodes):
        
         a = np.argmax(  Q[current_obs,0:env.action_space.n] )              
         #Get new state and reward from environment
-        next_obs, reward, terminated, truncated, info = env.step(a)
-        #print(next_obs)  #print(a) 
+        next_obs, reward, terminated, truncated, info = env.step(a)      
        
         #Update Q-Table with new knowledge
         Q[current_obs,a] = Q[current_obs,a] + lr*(reward + y*np.max(Q[next_obs,:]) - Q[current_obs,a])
