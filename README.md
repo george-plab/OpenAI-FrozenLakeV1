@@ -33,9 +33,9 @@ The mod is an upgrade from OpenAiGym  to OpenAiGymnasium
 if you have any problem. instal one after the other one
 ```bash
   pipenv install transformers 
-  pipenv torch 
-  pipenv torchvision
-  pipenv pandas 
+  pipenv install torch 
+  pipenv install torchvision
+  pipenv install pandas 
 ```
 ## usage
 ### sumary
